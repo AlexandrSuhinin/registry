@@ -563,9 +563,11 @@ def build_registry(dry_run: bool = False):
 
     # Agents excluded from registry.json (default registry)
     DEFAULT_EXCLUDE_IDS = {"github-copilot"}
-    default_agents = [a for a in agents if a["id"] not in DEFAULT_EXCLUDE_IDS]    # Agents excluded from registry-for-jetbrains.json
+    default_agents = [a for a in agents if a["id"] not in DEFAULT_EXCLUDE_IDS]
 
+    # Agents excluded from registry-for-jetbrains.json
     JETBRAINS_EXCLUDE_IDS = {"codex-acp", "junie", "github-copilot-cli"}
+
     def patch_agent_for_jetbrains(agent):
         if agent["id"] == "claude-acp":
             assert "npx" in agent["distribution"], "claude-acp must have npx distribution"
@@ -573,7 +575,9 @@ def build_registry(dry_run: bool = False):
             agent["distribution"]["npx"].setdefault("args", []).append("--hide-claude-auth")
         return agent
 
-    jetbrains_agents = [patch_agent_for_jetbrains(a) for a in agents if a["id"] not in JETBRAINS_EXCLUDE_IDS]
+    jetbrains_agents = [
+        patch_agent_for_jetbrains(a) for a in agents if a["id"] not in JETBRAINS_EXCLUDE_IDS
+    ]
 
     if dry_run:
         print(f"\nDry run: validated {len(agents)} agents successfully")
