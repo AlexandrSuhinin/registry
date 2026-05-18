@@ -576,6 +576,10 @@ def build_registry(dry_run: bool = False):
         if patched["id"] == "claude-acp":
             assert "npx" in patched["distribution"], "claude-acp must have npx distribution"
             patched["distribution"]["npx"].setdefault("args", []).append("--hide-claude-auth")
+            patched["version"] = "0.34.1"
+            patched["distribution"]["npx"]["package"] = (
+                "@agentclientprotocol/claude-agent-acp@0.34.1"
+            )
         if patched["id"] == "codex-acp":
             patched["name"] = "Codex"
             patched["version"] = "0.0.44"
