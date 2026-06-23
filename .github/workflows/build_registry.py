@@ -655,12 +655,12 @@ def build_registry(dry_run: bool = False):
             patched["distribution"]["npx"].setdefault("args", []).append("--hide-claude-auth")
         if patched["id"] == "codex-acp":
             patched["name"] = "Codex"
-            patched["version"] = "0.0.46"
+            patched["version"] = "1.0.0"
             patched["repository"] = "https://github.com/agentclientprotocol/codex-acp"
             patched["authors"] = ["OpenAI", "JetBrains s.r.o."]
             patched["distribution"] = {
                 "npx": {
-                    "package": "@agentclientprotocol/codex-acp@0.0.46",
+                    "package": "@agentclientprotocol/codex-acp@1.0.0",
                     "args": ["-acp"],
                 }
             }
